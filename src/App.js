@@ -104,7 +104,9 @@ const Display = (props) => {
         Das Sound Machine
         </div>
         <div id="display">
-          {props.message}
+          <div id="panel">
+            {props.message}
+          </div>
         </div>
       </div>
     )
