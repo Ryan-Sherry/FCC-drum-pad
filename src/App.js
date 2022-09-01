@@ -64,35 +64,30 @@ class App extends React.Component {
     this.state = {
       display: ""
     };
-  this.onClick = this.onClick.bind(this);
-  this.onKeyDown = this.onKeyDown.bind(this);
-  this.updateDisplay = this.updateDisplay.bind(this);
   }
   render(){
     return (
-      <div id="drum-machine">
-        <DrumPad onClick={this.onClick} onKeyDown={this.onKeyDown}/>
-        <Display message={this.state.display} onClick={this.onClick} onKeyDown={this.onKeyDown}/>
+      <div id="wrapper">
+        <div id="drum-machine">
+          <Display message={this.state.display} onClick={this.onClick} onKeyDown={this.onKeyDown}/>
+          <DrumPad onClick={this.onClick} onKeyDown={this.onKeyDown}/>
+        </div>
       </div>
     );
   }
 }
 
-class DrumPad extends React.Component {
-  constructor(props){
-    super(props);
-  }
-  render() {
+const DrumPad = (props) => {
     const renderPads = soundBank
       .map(item => <div 
         className='drum-pad'
         id={item.id}
         keyCode={item.keyCode}
-        onClick={this.props.onClick}
-        onKeyDown={this.props.onKeyDown}
+        onClick={props.onClick}
+        onKeyDown={props.onKeyDown}
         >
           <p>{item.keyTrigger}</p>
-          <audio src={item.url} id={item.keyTrigger} />
+          <audio src={item.url} id={item.keyTrigger}></audio>
         </div>
       )
     return (
@@ -101,21 +96,18 @@ class DrumPad extends React.Component {
       </div>
     )
   }
-}
 
-class Display extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      display: ""
-    }
-  }
-  render() {
+const Display = (props) => {
     return (
-      <div id="display">
+      <div id="display-wrapper">
+        <div id="dsm">
+        Das Sound Machine
+        </div>
+        <div id="display">
+          {props.message}
+        </div>
       </div>
     )
   }
-}
 
 export default App;

@@ -1,24 +1,49 @@
-.App {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
+html{
   background-color: azure;
+  height:100%;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+#wrapper {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #drum-machine {
-  width: 70%;
   height: 50%;
-  background-color: orangered;
+  width: 60%;
+  border: solid 1px black;
   display: grid;
-  grid-template-columns: 1;
-  grid-template-rows: 1fr 3fr;
+  grid-template-columns: 1fr 1fr;
+  box-sizing: border-box;
 }
 
 #drum-pad-container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding:0;
   display: grid;
-  grid-template-columns: 3;
-  grid-template-rows: 3;
-  background-color: orangered;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.drum-pad {
+  width: 60%;
+  height: 60%;
+  border: solid 1px black;
+  margin-left: 20px;
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
 }
