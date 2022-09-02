@@ -65,51 +65,42 @@ class App extends React.Component {
       display: ""
     };
   }
-  render(){
-    return (
-      <div id="wrapper">
-        <div id="drum-machine">
-          <Display message={this.state.display} onClick={this.onClick} onKeyDown={this.onKeyDown}/>
-          <DrumPad onClick={this.onClick} onKeyDown={this.onKeyDown}/>
-        </div>
-      </div>
-    );
-  }
-}
 
-const DrumPad = (props) => {
+
+  render(){
     const renderPads = soundBank
       .map(item => <div 
         className='drum-pad'
         id={item.id}
         keyCode={item.keyCode}
-        onClick={props.onClick}
-        onKeyDown={props.onKeyDown}
+        onClick={this.onClick}
+        onKeyDown={this.onKeyDown}
         >
           <p>{item.keyTrigger}</p>
-          <audio src={item.url} id={item.keyTrigger}></audio>
+          <audio className='clip' src={item.url} id={item.keyTrigger}></audio>
         </div>
       )
+      
     return (
-      <div id="drum-pad-container">
-        {renderPads}
-      </div>
-    )
-  }
-
-const Display = (props) => {
-    return (
-      <div id="display-wrapper">
-        <div id="dsm">
-        Das Sound Machine
-        </div>
-        <div id="display">
-          <div id="panel">
-            {props.message}
+      <div id="wrapper">
+        <div id="drum-machine">
+          <div id="display-wrapper">
+            <div id="dsm">
+            Das Sound Machine
+            </div>
+            <div id="display">
+              <div id="panel">
+                {this.state.message}
+              </div>
+            </div>
+          </div>
+          <div id="drum-pad-container">
+           {renderPads}
           </div>
         </div>
       </div>
-    )
+    );
   }
+}
 
 export default App;
