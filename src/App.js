@@ -62,7 +62,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      display: ""
+      display: "poopie"
     };
   }
 
@@ -90,7 +90,7 @@ class App extends React.Component {
             </div>
             <div id="display">
               <div id="panel">
-                {this.state.message}
+                {this.state.display}
               </div>
             </div>
           </div>
