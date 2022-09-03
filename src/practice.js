@@ -1,6 +1,3 @@
-import React from 'react';
-import './App.css';
-
 const soundBank = [
   {
     keyCode: 81,
@@ -66,10 +63,9 @@ class App extends React.Component {
     };
   this.onClick = this.onClick.bind(this);
   }
-  onClick() {
-    this.setState({
-      display: "lol"
-
+ onClick() {
+  this.setState({
+    display: "lol"
   })
  }
 
@@ -103,7 +99,7 @@ const Display = (props) => {
       </div>
       <div id="display">
         <div id="panel">
-          {props.message}
+          {props.display}
         </div>
       </div>
     </div>
@@ -119,6 +115,53 @@ const Pads = (props) => {
   )
 }
 
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      display: "Lets begin!"
+    };
+  this.onClick = this.onClick.bind(this);
+  }
+ onClick() {
+  this.setState({
+    display: "lol"
+  })
+ }
 
-
-export default App;
+  render(){
+    const renderPads = soundBank
+      .map(item => 
+      <div 
+        className='drum-pad'
+        id={item.id}
+        keyCode={item.keyCode}
+        onClick={this.onClick}
+        onKeyDown={this.onKeyDown}
+      >
+        <p>{item.keyTrigger}</p>
+        <audio className='clip' src={item.url} id={item.keyTrigger}></audio>
+      </div>
+      )
+      
+    return (
+      <div id="wrapper">
+        <div id="drum-machine">
+          <div id="display-wrapper">
+            <div id="dsm">
+            Das Sound Machine
+            </div>
+            <div id="display">
+              <div id="panel">
+                {this.state.display}
+              </div>
+            </div>
+          </div>
+          <div id="drum-pad-container">
+           {renderPads}
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
