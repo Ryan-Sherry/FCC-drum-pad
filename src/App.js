@@ -65,13 +65,17 @@ class App extends React.Component {
       display: "Lets begin!"
     };
   this.onClick = this.onClick.bind(this);
+  this.updateDisplay = this.updateDisplay.bind(this);
   }
   onClick() {
+    this.updateDisplay();
+  }
+
+  updateDisplay() {
     this.setState({
       display: "lol"
-
-  })
- }
+    })
+  }
 
   render(){
     return (
@@ -81,11 +85,12 @@ class App extends React.Component {
           <div id="drum-pad-container">
             {soundBank.map(item => 
               <Pads 
+              url={item.url}
               className='drum-pad'
               id={item.id}
               keyTrigger={item.keyTrigger}
               keyCode={item.keyCode}
-              onClick={this.onClick}
+              updateDisplay={this.updateDisplay}
               onKeyDown={this.onKeyDown}/>)
             }
           </div>
@@ -111,10 +116,17 @@ const Display = (props) => {
 }
 
 const Pads = (props) => {
+ 
+    const playSound = () => {
+    const soundClip = document.getElementById(props.keyTrigger)
+    soundClip.currentTime = 0;
+    soundClip.play();
+    props.updateDisplay();
+  }
   return (
-    <div className={props.className} onClick={props.onClick} onKeyDown={props.onKeyDown}>
-      <p>{props.keyTrigger}</p>
+    <div className={props.className}  id={props.id} onClick={playSound} onKeyDown={props.onKeyDown}>
       <audio className='clip' src={props.url} id={props.keyTrigger}></audio>
+      {props.keyTrigger}
     </div>
   )
 }
