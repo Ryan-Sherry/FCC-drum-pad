@@ -62,22 +62,22 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      display: "Lets begin!"
+      display: "Lets play!"
     };
   this.updateDisplay = this.updateDisplay.bind(this);
   }
-
+  //displays the parameter. See playSound() in Pads Component
   updateDisplay(clipName) {
     this.setState({
       display: clipName
     })
   }
-
   render(){
     return (
       <div id="wrapper">
         <div id="drum-machine">
           <Display message={this.state.display}/>
+          {/*mapped soundBank into child component*/}
           <div id="drum-pad-container">
             {soundBank.map(item => 
               <Pads 
@@ -95,6 +95,8 @@ class App extends React.Component {
   }
 }
 
+/*Pads needed to ba a class component in order to add event listeners without using
+ref and some other thing I don't currently understand.*/
 class Pads extends React.Component{
   constructor(props) {
     super(props);
@@ -102,6 +104,8 @@ class Pads extends React.Component{
     this.playSound = this.playSound.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
+  //These lifecycle event were what allowed the keydown function to work.
+  //Keydown uses keycodes (may differ by keyboard), whereas keypress uses the value on a given key.
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeyPress);
   }
@@ -110,16 +114,20 @@ class Pads extends React.Component{
   }
   handleClick() {
     this.playSound();
-  }
+  } 
   handleKeyPress(e) {
     if(e.keyCode === this.props.keyCode) {
       this.playSound();
       }
     }
   playSound() {
+    //accessing element by its mapped id.
     const soundClip = document.getElementById(this.props.keyTrigger)
+    //currentTime = time point in soundclip (i.e. 0 = start).
     soundClip.currentTime = 0;
+    //play() method triggers sound playback.
     soundClip.play();
+    //taking the id value from the original/mapped array, and replacing hypehns with empty spaces.
     this.props.updateDisplay(this.props.id.replace(/-/g, ' '))
   }
   render() {
