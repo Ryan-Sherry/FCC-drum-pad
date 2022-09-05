@@ -64,16 +64,12 @@ class App extends React.Component {
     this.state = {
       display: "Lets begin!"
     };
-  this.onClick = this.onClick.bind(this);
   this.updateDisplay = this.updateDisplay.bind(this);
   }
-  onClick() {
-    this.updateDisplay();
-  }
 
-  updateDisplay() {
+  updateDisplay(clipName) {
     this.setState({
-      display: "lol"
+      display: clipName
     })
   }
 
@@ -90,14 +86,36 @@ class App extends React.Component {
               id={item.id}
               keyTrigger={item.keyTrigger}
               keyCode={item.keyCode}
-              updateDisplay={this.updateDisplay}
-              onKeyDown={this.onKeyDown}/>)
+              updateDisplay={this.updateDisplay}/>)
             }
           </div>
         </div>      
       </div>
     )
   }
+}
+
+const Pads = (props) => {
+    const handleClick = () => {
+      playSound();
+    }
+    const handleKeyPress = (e) => {
+      if(e.keyCode === props.keyCode) {
+      playSound();
+      }
+    }
+    const playSound = () => {
+    const soundClip = document.getElementById(props.keyTrigger)
+    soundClip.currentTime = 0;
+    soundClip.play();
+    props.updateDisplay(props.id.replace(/-/g, ' '))
+  }
+  return (
+    <div className={props.className}  id={props.id} onClick={handleClick} onKeyDown={handleKeyPress}>
+      <audio className='clip' src={props.url} id={props.keyTrigger}></audio>
+      {props.keyTrigger}
+    </div>
+  )
 }
 
 const Display = (props) => {
@@ -114,23 +132,5 @@ const Display = (props) => {
     </div>
   )
 }
-
-const Pads = (props) => {
- 
-    const playSound = () => {
-    const soundClip = document.getElementById(props.keyTrigger)
-    soundClip.currentTime = 0;
-    soundClip.play();
-    props.updateDisplay();
-  }
-  return (
-    <div className={props.className}  id={props.id} onClick={playSound} onKeyDown={props.onKeyDown}>
-      <audio className='clip' src={props.url} id={props.keyTrigger}></audio>
-      {props.keyTrigger}
-    </div>
-  )
-}
-
-
 
 export default App;
