@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/https//:Ryan-Sherry.github.io/my-drum-pad/static/css/main.24c80d03.css",
-    "main.js": "/https//:Ryan-Sherry.github.io/my-drum-pad/static/js/main.a523e6f4.js",
-    "index.html": "/https//:Ryan-Sherry.github.io/my-drum-pad/index.html",
-    "main.24c80d03.css.map": "/https//:Ryan-Sherry.github.io/my-drum-pad/static/css/main.24c80d03.css.map",
-    "main.a523e6f4.js.map": "/https//:Ryan-Sherry.github.io/my-drum-pad/static/js/main.a523e6f4.js.map"
+    "main.css": "/my-drum-pad/static/css/main.24c80d03.css",
+    "main.js": "/my-drum-pad/static/js/main.a523e6f4.js",
+    "index.html": "/my-drum-pad/index.html",
+    "main.24c80d03.css.map": "/my-drum-pad/static/css/main.24c80d03.css.map",
+    "main.a523e6f4.js.map": "/my-drum-pad/static/js/main.a523e6f4.js.map"
   },
   "entrypoints": [
     "static/css/main.24c80d03.css",
